@@ -9,18 +9,23 @@
 	<P>We do not have any Customers</P>
 }
 else {
-	<table>
-		<thead>
-			<tr>
-				<th>Customer</th>
-			</tr>
-		</thead>
-		<tbody>
-			@foreach (var customer in Model) {
+	<p>
+		@Html.ActionLink("Create New Customer", "Create", "Customers", new { id = 0 }, new { @class = "btn btn-primary" })
+	</p>
+		<table class="table table-bordered table-hover">
+			<thead>
 				<tr>
-					<td>@Html.ActionLink(customer.Name, "Details", "Customers", new { id = customer.Id }, null)</td>
+					<th>Customer</th>
+					<th>Membership Type</th>
 				</tr>
-			}
-		</tbody>
-	</table>
-}
+			</thead>
+			<tbody>
+				@foreach (var customer in Model) {
+					<tr>
+						<td>@Html.ActionLink(customer.Name, "Details", "Customers", new { id = customer.Id }, null)</td>
+						<td>@customer.MembershipType.Name</td>
+					</tr>
+				}
+			</tbody>
+		</table>
+		}
