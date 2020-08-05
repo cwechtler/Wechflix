@@ -5,10 +5,13 @@
 }
 
 <h2>@Model.Name</h2>
+<p>
+	@Html.ActionLink("Edit Movie", "Edit", "Movies", new { Id = Model.Id}, new { @class = "btn btn-primary"})
+</p>
 <ul>
 	<li>Genre: @Model.Genre.Name</li>
 	<li>Release Date: @Model.ReleaseDate.ToLongDateString()</li>
 	<li>Date Added: @Model.DateAdded.ToLongDateString()</li>
-	<li>Number in Stock: @Model.NumberInStock</li>
+	<li>Number In Stock: @Model.NumberInStock</li>
 </ul>
 

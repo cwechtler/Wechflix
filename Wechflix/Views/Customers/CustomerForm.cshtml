@@ -1,11 +1,11 @@
 ﻿@model Wechflix.ViewModels.CustomerFormViewModel
 @{
-	ViewBag.Title = "New";
+	ViewBag.Title = "New/Edit Customer";
 	Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 
-@if (Model.Customer.Id == 0) {
+@if (Model.Customer.Id == 0 || Model.Customer == null) {
 	<h2>New Customer</h2>
 }
 else {
