@@ -10,8 +10,9 @@ namespace Wechflix.Models
 	{
 		public int Id { get; set; }
 
-		[Required]
+		[Required(ErrorMessage = "Please enter Movie's Name")]
 		[StringLength(255)]
+		[CheckDuplicateMovieName]
 		public string Name { get; set; }
 
 		public Genre Genre { get; set; }
@@ -27,6 +28,7 @@ namespace Wechflix.Models
 		public DateTime DateAdded { get; set; }
 
 		[Display(Name = "Number In Stock")]
+		[Range(1,50, ErrorMessage = "Value Must be between 1 and 50")]
 		public byte NumberInStock { get; set; }
 	}
 }

@@ -4,33 +4,45 @@
 	Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@if (Model.movie.Id == 0 || Model.movie == null) {
+@*@if (Model.Id == 0 || Model == null) {
 	<h2>New Movie</h2>
 }
 else {
 	<h2>Edit Movie</h2>
-}
+}*@
+<h2>@Model.Title</h2>
 
 @using (Html.BeginForm("Save", "Movies")) {
+	@Html.ValidationSummary()
 	<Div class="form-group">
-		@Html.LabelFor(m => m.movie.Name)
-		@Html.TextBoxFor(m => m.movie.Name, new { @class = "form-control" })
+		@Html.LabelFor(m => m.Name)
+		@Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+		@Html.ValidationMessageFor(m => m.Name)
 	</Div>
 	<Div class="form-group">
-		@Html.LabelFor(m => m.movie.ReleaseDate)
-		@Html.TextBoxFor(m => m.movie.ReleaseDate, "{0:d MMM yyyy}" , new { @class = "form-control" })
+		@Html.LabelFor(m => m.ReleaseDate)
+		@Html.TextBoxFor(m => m.ReleaseDate, "{0:d MMM yyyy}", new { @class = "form-control" })
+		@Html.ValidationMessageFor(m => m.ReleaseDate)
 	</Div>
 	<Div class="form-group">
-		@Html.LabelFor(m => m.movie.GenreId)
-		@Html.DropDownListFor(m => m.movie.GenreId, new SelectList(Model.Genres, "Id", "Name"), "" ,new { @class = "form-control" })
+		@Html.LabelFor(m => m.GenreId)
+		@Html.DropDownListFor(m => m.GenreId, new SelectList(Model.Genres, "Id", "Name"), "Select Movie Genre", new { @class = "form-control" })
+		@Html.ValidationMessageFor(m => m.GenreId)
 	</Div>
 	<Div class="form-group">
-		@Html.LabelFor(m => m.movie.NumberInStock)
-		@Html.TextBoxFor(m => m.movie.NumberInStock, new { @class = "form-control" })
+		@Html.LabelFor(m => m.NumberInStock)
+		@Html.TextBoxFor(m => m.NumberInStock, new { @class = "form-control" })
+		@Html.ValidationMessageFor(m => m.NumberInStock)
 	</Div>
-	@Html.HiddenFor(m => m.movie.Id)
+	@Html.HiddenFor(m => m.Id)
+	@Html.AntiForgeryToken()
 	<Button type="submit" class="btn btn-primary">Save</Button>
 
+}
+
+@section scripts
+{
+	@Scripts.Render("~/bundles/jqueryval")
 }
 
 
