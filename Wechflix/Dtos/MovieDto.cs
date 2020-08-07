@@ -15,8 +15,10 @@ namespace Wechflix.Dtos
 		[StringLength(255)]
 		public string Name { get; set; }
 
+	
 		[Required]
 		public int GenreId { get; set; }
+		public GenreDto Genre { get; set; }
 
 		public DateTime ReleaseDate { get; set; }
 
