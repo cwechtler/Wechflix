@@ -43,6 +43,7 @@ namespace Wechflix.Controllers.Api
 
 		// POST /api/movies
 		[HttpPost]
+		[Authorize(Roles = RoleNames.CanManageMovies)]
 		public IHttpActionResult CreateMovie(MovieDto movieDto)
 		{
 			if (!ModelState.IsValid) {
@@ -64,6 +65,7 @@ namespace Wechflix.Controllers.Api
 
 		// PUT /api/movies/1
 		[HttpPut]
+		[Authorize(Roles = RoleNames.CanManageMovies)]
 		public IHttpActionResult UpdateMovie(int id, MovieDto movieDto)
 		{
 			if (!ModelState.IsValid) {
@@ -84,6 +86,7 @@ namespace Wechflix.Controllers.Api
 		}
 
 		// DELETE /api/movies/1
+		[Authorize(Roles = RoleNames.CanManageMovies)]
 		public IHttpActionResult DeleteMovie(int id)
 		{
 			var movieInDb = _context.Movies.SingleOrDefault(m => m.Id == id);

@@ -25,7 +25,10 @@ namespace Wechflix.Controllers
 
 		public ActionResult Index()
 		{
-			return View();
+			if (User.IsInRole(RoleNames.CanManageMovies)){
+				return View("List");
+			}
+			return View("ReadOnlyList");
 		}
 
 		public ActionResult Details(int id) {
@@ -35,18 +38,29 @@ namespace Wechflix.Controllers
 				return HttpNotFound();
 			}
 
-			return View(movie);
+			if (User.IsInRole(RoleNames.CanManageMovies)) {
+				return View(movie);
+			}
+			return View("DetailsNoEdit", movie);
 		}
 
 		public ActionResult RandomMovie()
 		{
-			Random random = new Random();
-			int randomId = random.Next(1, _context.Movies.Count());
+			int randomId = RandomMovieGenerator();
 
 			var movie = _context.Movies.Include(m => m.Genre).SingleOrDefault(m => m.Id == randomId);
-			return View("Details", movie);
+
+			if (movie == null) {
+				return HttpNotFound("Movie is null");
+			}
+
+			if (User.IsInRole("CanManageMovies")) {
+				return View("Details", movie);
+			}
+			return View("DetailsNoEdit", movie);
 		}
 
+		[Authorize(Roles = RoleNames.CanManageMovies)]
 		public ActionResult CreateNew()
 		{
 			var viewModel = new MovieFormViewModel 
@@ -57,6 +71,7 @@ namespace Wechflix.Controllers
 			return View("MovieForm", viewModel);
 		}
 
+		[Authorize(Roles = RoleNames.CanManageMovies)]
 		public ActionResult Edit(int id)
 		{
 			var movie = _context.Movies.SingleOrDefault(m => m.Id == id);
@@ -75,6 +90,7 @@ namespace Wechflix.Controllers
 
 		[HttpPost]
 		[ValidateAntiForgeryToken]
+		[Authorize(Roles = RoleNames.CanManageMovies)]
 		public ActionResult Save(Movie movie)
 		{
 			if (!ModelState.IsValid) {
@@ -101,6 +117,21 @@ namespace Wechflix.Controllers
 			_context.SaveChanges();
 
 			return RedirectToAction("Index", "Movies");
+		}
+
+		private int RandomMovieGenerator()
+		{
+			var movieList = _context.Movies.ToList();
+			List<int> idList = new List<int>();
+
+			foreach (var m in movieList) {
+				idList.Add(m.Id);
+			}
+
+			Random random = new Random();
+			int randomIndex = random.Next(1, idList.Count);
+
+			return idList[randomIndex];
 		}
 	}
 }
