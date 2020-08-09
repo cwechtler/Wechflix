@@ -155,6 +155,7 @@ namespace Wechflix.Controllers
 				var user = new ApplicationUser {
 					UserName = model.Email,
 					Email = model.Email,
+					UserPhoneNumber = model.UserPhoneNumber,
 					DriversLicenceNumber = model.DriversLicenceNumber
 				};
 				var result = await UserManager.CreateAsync(user, model.Password);
@@ -382,6 +383,7 @@ namespace Wechflix.Controllers
 				var user = new ApplicationUser {
 					UserName = model.Email,
 					Email = model.Email,
+					UserPhoneNumber = model.UserPhoneNumber,
 					DriversLicenceNumber = model.DriversLicenceNumber
 				};
 				var result = await UserManager.CreateAsync(user);

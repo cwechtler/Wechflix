@@ -13,6 +13,11 @@ namespace Wechflix.Models
 		[StringLength(255)]
 		[Display(Name = "Drivers Licence Number")]
 		public string DriversLicenceNumber { get; set; }
+
+		[Required]
+		[StringLength(50)]
+		[Display(Name = "Phone Number")]
+		public string UserPhoneNumber { get; set; }
 	}
 
 	public class ExternalLoginListViewModel
@@ -69,6 +74,11 @@ namespace Wechflix.Models
 
 	public class RegisterViewModel
 	{
+		[Required]
+		[StringLength(50)]
+		[Display(Name = "Phone Number")]
+		public string UserPhoneNumber { get; set; }
+
 		[Required]
 		[StringLength(255)]
 		[Display(Name = "Drivers Licence Number")]
