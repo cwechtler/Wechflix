@@ -1,0 +1,57 @@
+﻿@model Wechflix.ViewModels.UserFormViewModel
+@{
+	ViewBag.Title = "Index";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Users</h2>
+@*@using (Html.BeginForm("AddRole", "Users")) {
+	<Div class="form-group">
+		@Html.DropDownListFor(m => m.UserRole, new SelectList(Model.AvailableRoleNames, "Name"), "", new { @class = "form-control" })
+	</Div>
+	<button type="submit" class="btn btn-primary" style="margin-bottom:20px">Add New Role</button>
+}*@
+
+<table id="users" class="table table-bordered table-hover">
+	<thead>
+		<tr>
+			@*<th>Username</th>*@
+			<th>Email</th>
+			<th>Phone Number</th>
+			<th>Drivers License Number</th>
+			<th>Role</th>
+			<th>Edit Role</th>
+		</tr>
+	</thead>
+	<tbody>
+		@{ int i = 0; }
+		@foreach (var user in Model.Users) {
+			<tr>
+				@*<td>@user.UserName</td>*@
+				<td>@Html.ActionLink(user.Email, "Edit", "Users", new { Id = user.Id }, null)</td>
+				<td>@user.UserPhoneNumber</td>
+				<td>@user.DriversLicenceNumber</td>
+				<td>@Model.UserRoles[i];</td>
+				<td>
+					@using (Html.BeginForm("AddRoleToUser", "Users", new {Id =user.Id })) {
+						<div>
+							@Html.DropDownListFor(m => m.UserRole, new SelectList(Model.ListOfRoles, "Name"), "Select User Role", null)
+							<Button type="submit" class="btn-md btn-primary">Add Role</Button>
+						</div>
+						@Html.AntiForgeryToken()
+					}
+					@using (Html.BeginForm("RemoveRoleFromUser", "Users", new { Id = user.Id })) {
+						<div>
+							@Html.DropDownListFor(m => m.UserRole, new SelectList(Model.ListOfRoles, "Name"), "Select User Role", null)
+							<Button type="submit" class="btn-md btn-danger">Remove Role</Button>
+						</div>
+						@Html.AntiForgeryToken()
+					}
+				</td>		
+			</tr>
+			i++;
+		}
+	</tbody>
+</table>
+
+

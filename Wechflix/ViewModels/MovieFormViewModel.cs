@@ -10,7 +10,6 @@ namespace Wechflix.ViewModels
 	public class MovieFormViewModel
 	{
 		public IEnumerable<Genre> Genres { get; set; }
-		//public Movie movie { get; set; }
 
 		public int? Id { get; set; }
 

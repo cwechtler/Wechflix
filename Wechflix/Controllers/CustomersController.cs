@@ -39,6 +39,7 @@ namespace Wechflix.Controllers
 			return View(customer);
 		}
 
+		[Authorize(Roles = (RoleNames.CanManageCustomers))]
 		public ActionResult CreateNew()
 		{
 			var viewModel = new CustomerFormViewModel {
@@ -49,6 +50,7 @@ namespace Wechflix.Controllers
 			return View("CustomerForm", viewModel);
 		}
 
+		[Authorize(Roles = (RoleNames.CanManageCustomers))]
 		public ActionResult Edit(int id)
 		{
 			var customer = _context.Customers.SingleOrDefault(c => c.Id == id);
@@ -66,6 +68,7 @@ namespace Wechflix.Controllers
 
 		[HttpPost]
 		[ValidateAntiForgeryToken]
+		[Authorize(Roles = (RoleNames.CanManageCustomers))]
 		public ActionResult Save(Customer customer)
 		{
 			if (!ModelState.IsValid) {

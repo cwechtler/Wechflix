@@ -1,0 +1,41 @@
+﻿@model Wechflix.ViewModels.UserFormViewModel
+@{
+	ViewBag.Title = "UserForm";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>UserForm</h2>
+
+@using (Html.BeginForm("Save", "Users")) {
+	@Html.ValidationSummary()
+	@*<Div class="form-group">
+		@Html.LabelFor(m => m.Id)
+		@Html.TextBoxFor(m => m.Id, new { @class = "form-control" })
+		@Html.ValidationMessageFor(m => m.Email)
+	</Div>*@
+	<Div class="form-group">
+		@Html.LabelFor(m => m.Email)
+		@Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+		@Html.ValidationMessageFor(m => m.Email)
+	</Div>
+	<Div class="form-group">
+		@Html.LabelFor(m => m.UserphoneNumber)
+		@Html.TextBoxFor(m => m.UserphoneNumber, "{0:(###) ###-####}", new { @class = "form-control" })
+	</Div>
+	<Div class="form-group">
+		@Html.LabelFor(m => m.DriversLicenseNumber)
+		@Html.TextBoxFor(m => m.DriversLicenseNumber, new { @class = "form-control" })
+	</Div>
+	@*<Div class="form-group">
+		@Html.LabelFor(m => m.UserRole)
+		@Html.DropDownListFor(m => m.UserRole, new SelectList(Model.ListOfRoles, "Name"), "Select User Role", new { @class = "form-control" })
+	</Div>*@
+	@Html.HiddenFor(m => m.Id)
+	@Html.AntiForgeryToken()
+	<Button type="submit" class="btn btn-primary">Save</Button>
+}
+
+@section scripts
+{
+	@Scripts.Render("~/bundles/jqueryval")
+}
