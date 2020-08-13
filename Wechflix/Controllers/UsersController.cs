@@ -12,6 +12,7 @@ using Wechflix.ViewModels;
 
 namespace Wechflix.Controllers
 {
+	[Authorize(Roles = RoleNames.CanManageUsers)]
 	public class UsersController : Controller
 	{
 		ApplicationDbContext _context;

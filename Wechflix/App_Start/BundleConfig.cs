@@ -13,7 +13,9 @@ namespace Wechflix
 						"~/Scripts/bootstrap.js",
 						"~/Scripts/bootbox.js",
 						"~/Scripts/datatables/jquery.datatables.js",
-						"~/Scripts/datatables/datatables.bootstrap.js"));
+						"~/Scripts/datatables/datatables.bootstrap.js",
+						"~/scripts/typeahead.bundle.js",
+						"~/Scripts/toastr.js"));
 
 			bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
 						"~/Scripts/jquery.validate*"));
@@ -26,6 +28,8 @@ namespace Wechflix
 			bundles.Add(new StyleBundle("~/Content/css").Include(
 					  "~/Content/bootstrap-lumen.css",
 					  "~/content/datatables/css/datatables.bootstrap.css",
+					  "~/content/typeahead.css",
+					  "~/content/toastr.css",
 					  "~/Content/site.css"));
 		}
 	}

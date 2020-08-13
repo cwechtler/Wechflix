@@ -30,5 +30,8 @@ namespace Wechflix.Models
 		[Display(Name = "Number In Stock")]
 		[Range(1,50, ErrorMessage = "Value Must be between 1 and 50")]
 		public byte NumberInStock { get; set; }
+
+
+		public byte NumberAvailable { get; set; }
 	}
 }
